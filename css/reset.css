@@ -139,7 +139,8 @@ h2 {
 
 h3 {
     font-size: 1.17em;
-    margin: 1em 0;
+    margin: 0;
+    padding:0 0 1em 0;
 }
 
 h4 {
@@ -295,8 +296,10 @@ sub {
 dl,
 menu,
 ol,
-ul {
-    margin: 1em 0;
+ul,
+li {
+    margin: 0;
+    padding: 0;
 }
 
 dd {
@@ -310,7 +313,7 @@ dd {
 menu,
 ol,
 ul {
-    padding: 0 0 0 40px;
+    padding: 0;
 }
 
 /**

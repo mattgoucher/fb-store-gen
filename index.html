@@ -9,48 +9,66 @@
 		<div id="generator">
 
 			<div class="storesettings settings">
-				<form id="page-settings">
-					<div class="input text">
-						<label for="store-banner">Store Name:</label>
-						<input id="storeName" name="store-name" type="text" placeholder="Awesome Store">
+				<div class="wrapper">
+					<div class="header">
+						<h3 class="title">Store Settings</h3>
 					</div>
-					<div class="input text">
-						<label for="store-banner">Store URL:</label>
-						<input id="storeUrl" name="store-url" type="text" placeholder="http://jakeowen.net/store">
-					</div>
-					<div class="input text">
-						<label for="store-banner">Banner URL:</label>
-						<input id="storeBanner" name="store-banner" type="text" placeholder="http://site.com/image.jpg">
-					</div>
-				</form>	
+					<form id="page-settings">
+						<div class="input text">
+							<label for="store-banner">Store Name:</label>
+							<input id="storeName" name="store-name" type="text" placeholder="Awesome Store">
+						</div>
+						<div class="input text">
+							<label for="store-banner">Store URL:</label>
+							<input id="storeUrl" name="store-url" type="text" placeholder="http://jakeowen.net/store">
+						</div>
+						<div class="input text">
+							<label for="store-banner">Banner URL:</label>
+							<input id="storeBanner" name="store-banner" type="text" placeholder="http://site.com/image.jpg">
+						</div>
+					</form>
+				</div>
 			</div>
 
 			<div class="product-settings settings">
-				<form id="product-settings">
-					<div class="input text">
-						<label for="product-name">Name:</label>
-						<input id="productName" name="product-name" type="text" placeholder="Awesome Product">
+				<div class="wrapper">
+					<div class="header">
+						<h3 class="title">Add a Product</h3>
 					</div>
-					<div class="input text price">
-						<label for="product-price">Price: $</label>
-						<input id="productPrice" name="product-price" type="text" placeholder="1.99">
-					</div>
-					<div class="input text image-url">
-						<label for="product-image">Image URL:</label>
-						<input id="productImage" name="product-image" type="text" placeholder="http://site.com/image.jpg">
-					</div>
-					<div class="input text product-link">
-						<label for="product-link">Link:</label>
-						<input id="productLink" name="product-link" type="text" placeholder="http://site.com/store/products/test">
-					</div>
-					<div class="input submit add-product">
-						<input id="Add Product" type="submit" class="btn" value="Add Product">
-					</div>
-				</form>
+					<form id="product-settings">
+						<div class="input text">
+							<label for="product-name">Name:</label>
+							<input id="productName" name="product-name" type="text" placeholder="Awesome Product">
+						</div>
+						<div class="input text price">
+							<label for="product-price">Price: $</label>
+							<input id="productPrice" name="product-price" type="text" placeholder="1.99">
+						</div>
+						<div class="input text image-url">
+							<label for="product-image">Image URL:</label>
+							<input id="productImage" name="product-image" type="text" placeholder="http://site.com/image.jpg">
+						</div>
+						<div class="input text product-link">
+							<label for="product-link">Link:</label>
+							<input id="productLink" name="product-link" type="text" placeholder="http://site.com/store/products/test">
+						</div>
+						<div class="input submit add-product">
+							<input id="Add Product" type="submit" class="btn" value="Add Product">
+						</div>
+					</form>
+				</div>
 			</div>
 
 			<div class="created-products settings">
-				<ul id="products-list"></ul>
+				<div class="wrapper">
+					<div class="header">
+						<h3 class="title">
+							Created Products
+							<small>(click to remove)</small>
+						</h3>
+					</div>
+					<ul id="products-list"></ul>
+				</div>
 			</div>
 
 		</div>
@@ -111,7 +129,7 @@
 		</script>
 
 		<script id="product-list-item" type="text/template">
-			<li class="product-item"><%= productName %></li>
+			<li class="product-item" id="<%= productName %>"><%= productName %></li>
 		</script>
 
 		<script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>

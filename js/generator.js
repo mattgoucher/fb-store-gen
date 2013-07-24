@@ -18,6 +18,8 @@
             Products            = {};
             AddProductForm      = $("#product-settings"),
             AddProductInputs    = AddProductForm.find('input');
+
+            // Created Products List
             CreatedProductsList = $("#products-list");
 
             // Store Settings
@@ -81,9 +83,25 @@
             };
 
 
+            /**
+             * Load a product up for editing
+             * @param  {[type]} a [description]
+             * @return {[type]}   [description]
+             */
+            self.removeProduct = function(a) {
+                var clicked = $(this);
+
+                delete Products[clicked.attr("id")];
+                clicked.remove();
+                self.generate();
+
+            };
+
+
             // Bindings
             previewBtn.on("click", self.preview);
             AddProductForm.on("submit", self.addProduct);
+            CreatedProductsList.on("click", "li", self.removeProduct);
 
         }
 
@@ -139,12 +157,12 @@
 
             var itemTemplate = $("#product-list-item").html();
 
-            CreatedProductsList.html('');
+            CreatedProductsList.html('').hide();
 
             for (var product in Products) {
                 CreatedProductsList.append(
                     $(_.template(itemTemplate, {productName: product}))
-                )
+                ).show();
             }
 
         }
@@ -159,7 +177,7 @@
             StoreSettingsForm.find("input").each(function() {
                 var input = $(this);
 
-                storeSettings[input.attr("id")] = input.val() || "";
+                storeSettings[input.attr("id")] = (input.val() || "");
             });
 
         }

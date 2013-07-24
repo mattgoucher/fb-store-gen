@@ -26,6 +26,7 @@ a { color: #25BCB6; text-decoration: none; } a:hover { text-decoration: underlin
         float: left;
         width: 33.33%;
     }
+    #generator > .settings .wrapper { padding: 0 15px 0 0; }
 
         /* Inputs */
         #generator .settings .input {
@@ -44,6 +45,28 @@ a { color: #25BCB6; text-decoration: none; } a:hover { text-decoration: underlin
         width: 100%;
         height: 300px;
     }
+
+    /* Created Products */
+    .created-products ul {
+        max-height: 175px;
+        overflow-y: auto;
+        background: #fff;
+        border: 1px solid #ccc;
+        -webkit-border-radius: 3px;
+           -moz-border-radius: 3px;
+                border-radius: 3px;
+    }
+    .created-products li {
+        cursor: pointer;
+        display: block;
+        padding: 5px;
+        border-bottom: 1px solid #ccc;
+    }
+    .created-products li:hover {
+        color: #fff;
+        background: #bc2525;
+    }
+    .created-products li:last-of-type { border: none; }
 
 /**
  * Globals
