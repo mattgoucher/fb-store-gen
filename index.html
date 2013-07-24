@@ -1,79 +1,122 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<title>Facebook Store Generator</title>
+		<link rel="stylesheet" type="text/css" href="css/master.css">
+	</head>
+	<body>
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Fb-store-gen : " />
+		<div id="generator">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+			<div class="storesettings settings">
+				<form id="page-settings">
+					<div class="input text">
+						<label for="store-banner">Store Name:</label>
+						<input id="storeName" name="store-name" type="text" placeholder="Awesome Store">
+					</div>
+					<div class="input text">
+						<label for="store-banner">Store URL:</label>
+						<input id="storeUrl" name="store-url" type="text" placeholder="http://jakeowen.net/store">
+					</div>
+					<div class="input text">
+						<label for="store-banner">Banner URL:</label>
+						<input id="storeBanner" name="store-banner" type="text" placeholder="http://site.com/image.jpg">
+					</div>
+				</form>	
+			</div>
 
-    <title>Fb-store-gen</title>
-  </head>
+			<div class="product-settings settings">
+				<form id="product-settings">
+					<div class="input text">
+						<label for="product-name">Name:</label>
+						<input id="productName" name="product-name" type="text" placeholder="Awesome Product">
+					</div>
+					<div class="input text price">
+						<label for="product-price">Price: $</label>
+						<input id="productPrice" name="product-price" type="text" placeholder="1.99">
+					</div>
+					<div class="input text image-url">
+						<label for="product-image">Image URL:</label>
+						<input id="productImage" name="product-image" type="text" placeholder="http://site.com/image.jpg">
+					</div>
+					<div class="input text product-link">
+						<label for="product-link">Link:</label>
+						<input id="productLink" name="product-link" type="text" placeholder="http://site.com/store/products/test">
+					</div>
+					<div class="input submit add-product">
+						<input id="Add Product" type="submit" class="btn" value="Add Product">
+					</div>
+				</form>
+			</div>
 
-  <body>
+			<div class="created-products settings">
+				<ul id="products-list"></ul>
+			</div>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/mattgoucher/fb-store-gen">View on GitHub</a>
+		</div>
 
-          <h1 id="project_title">Fb-store-gen</h1>
-          <h2 id="project_tagline"></h2>
+		<div id="output">
+			<textarea id="generator-output" readonly></textarea>
+		</div>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/mattgoucher/fb-store-gen/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/mattgoucher/fb-store-gen/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+		<script id="before-html" type="text/template">
+			<!DOCTYPE html>
+			<html>
+				<head>
+					<title><%= storeName %></title>
+					<link rel="stylesheet" type="text/css" href="css/master.css">
+				</head>
+				<body>
+					<div style="font-family:'helvetica neue','helvetica',arial,sans-serif;font-weight:300">
+						<fieldset style="border-top:1px solid #ddd;border-left:none;border-right:none;border-bottom:none;max-width:576px;padding:15px 0px!important;margin:0 auto 20px auto!important">
+							<a href="<%= storeUrl %>" target="_blank">
+								<img src="<%= storeBanner %>" style="display: block; margin: 0 0 40px 0;">
+							</a>
+							<legend style="color:#555;font-size:20px;font-weight:bold;padding:0 10px 0 0">
+								<%= storeName %>
+							</legend>
+		</script>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+		<script id="product-item" type="text/template">
+							<div style="width:33.33%;float:left;">
+								<a href="<%= productLink %>" style="display: block;margin: 0 10px; color:#333;text-decoration:none" target="_blank">
+									<div style="max-height:130px;overflow:hidden;border:5px solid #d4d4d4;position:relative">
+										<img src="<%= productImage %>" style="width:100%">
+										<div style="position:absolute;width:100%;height:25px;right:0;bottom:0;background:rgba(255,255,255,0.7);text-align:right">
+											<span style="position:absolute;display:block;width:90%;height:100%;padding:0 5%;top:-12px;left:0;color:#333;text-decoration:none">
+												<p>$<%= productPrice %></p>
+											</span>
+										</div>
+									</div>
+									<h3 style="font-weight:300;font-size:12px;text-align:right"><%= productName %></h3>
+								</a>
+							</div>
+		</script>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+		<script id="after-html" type="text/template">
+						</fieldset>
+					</div>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+					<div class="footer">
+						<p style=" text-align: center; font-size: 14px; background: #EEE; text-shadow: 0px 1px 0px #FFF; border: 1px solid #DDD; padding: 15px 10px;">
+							<strong>Want to see more?</strong>
+							Check out the full
+							<a href="<%= storeUrl %>" target="_blank" style="color: #333; text-decoration: none;">
+								Online Store &rarr;
+							</a>
+						</p>
+					</div>
+				</body>
+			</html>
+		</script>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+		<script id="product-list-item" type="text/template">
+			<li class="product-item"><%= productName %></li>
+		</script>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+		<script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+		<script src="js/underscore.js" type="text/javascript"></script>
+		<script src="js/generator.js" type="text/javascript"></script>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Fb-store-gen maintained by <a href="https://github.com/mattgoucher">mattgoucher</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
+	</body>
 </html>

@@ -1,0 +1,69 @@
+/**
+ * Facebook Store Generator
+ * ========================
+ * 
+*/
+@import url(reset.css);
+
+body {
+    font: 300 13px/1.25 "Helvetica Neue", "Helvetica", sans-serif;
+}
+a { color: #25BCB6; text-decoration: none; } a:hover { text-decoration: underline; }
+
+/**
+ * Generator
+ * =========
+ * Structure, Product, Output
+*/
+
+    /* Structure */
+    #generator {
+        padding: 15px;
+        overflow: hidden;
+        background: #eee;
+    }
+    #generator > .settings {
+        float: left;
+        width: 33.33%;
+    }
+
+        /* Inputs */
+        #generator .settings .input {
+            display: block;
+            margin: 0 0 10px 0;
+            overflow: hidden;
+        }
+        #generator .settings label {
+            display: block;
+            float: left;
+            width: 100px;
+        }
+
+    /* Output */
+    #output textarea {
+        width: 100%;
+        height: 300px;
+    }
+
+/**
+ * Globals
+ * =======
+ * Buttons
+*/
+
+    /* Buttons */
+    .btn {
+        display: block;
+        padding: 15px 0;
+        width: 100%;
+        color: #fff;
+        font-weight: 700;
+        text-transform: uppercase;
+        border: none;
+        background: #25BCB6;
+        -webkit-border-radius: 3px;
+           -moz-border-radius: 3px;
+                border-radius: 3px;
+    }
+    .btn:hover { background: #2a9e99; }
+    .btn[disabled="disabled"] { opacity: 0.2; }
