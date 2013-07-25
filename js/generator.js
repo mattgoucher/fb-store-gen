@@ -2,7 +2,9 @@
 
     var Generator = (function() {
 
-        var generate,
+        var totalCreated,
+            productId,
+            generate,
             Products,
             storeSettings,
             AddProductForm,
@@ -12,8 +14,9 @@
         function Generator() {
 
             var self         = this,
-                previewBtn   = $("#preview"),
-                totalCreated = 0;
+                previewBtn   = $("#preview");
+            
+            totalCreated = 0;
 
             // Product Form
             Products            = {};
@@ -27,9 +30,13 @@
             storeSettings       = {};
             StoreSettingsForm   = $("#page-settings");
 
+            // How many we created
+            productId           = $("#productId");
+
             // Map for testing
             self.Products = Products;
 
+            updateProductId();
 
             /**
              * Take values from inputs and create project-object
@@ -40,8 +47,6 @@
 
                 var errors   = 0,
                     settings = {};
-
-                totalCreated = totalCreated + 1;
 
                 settings["productId"] = totalCreated;
 
@@ -63,6 +68,7 @@
                 if (errors) {
                     alert("Please Fill out all fields");
                 }else{
+                    updateProductId();
                     createProduct(settings);
                     zeroProductFields();
                 }
@@ -90,11 +96,10 @@
 
 
             /**
-             * Load a product up for editing
-             * @param  {[type]} a [description]
-             * @return {[type]}   [description]
+             * Blow away a product
+             * @return undefined
              */
-            self.removeProduct = function(a) {
+            self.removeProduct = function() {
                 var clicked = $(this);
 
                 // Delete if con
@@ -114,9 +119,32 @@
             };
 
 
+            /**
+             * Load up a product for editing
+             * @return {undefined}
+             */
+            self.editProduct = function() {
+
+                var clicked       = $(this),
+                    productId     = clicked.attr("rel").replace("product-", ""),
+                    loadedProduct = Products[productId];
+
+                if (!loadedProduct) {
+                    return alert("Something really bad happened");
+                }
+
+                AddProductInputs.each(function() {
+                    if (loadedProduct[$(this).attr("id")]) {
+                        $(this).val(loadedProduct[$(this).attr("id")]);
+                    }
+                });
+
+            }
+
             // Bindings
             previewBtn.on("click", self.preview);
             AddProductForm.on("submit", self.addProduct);
+            CreatedProductsList.on("click", ".edit-product", self.editProduct);
             CreatedProductsList.on("click", ".remove-product", self.removeProduct);
 
         }
@@ -217,6 +245,15 @@
             });
         }
 
+
+        /**
+         * Update the DOM with the correct product
+         * @return {undefined}
+         */
+        function updateProductId() {
+            totalCreated = totalCreated + 1;
+            productId.val(totalCreated);
+        }
 
         return Generator;
 
