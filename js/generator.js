@@ -41,7 +41,9 @@
                 var errors   = 0,
                     settings = {};
 
-                settings["productId"] = totalCreated + 1;
+                totalCreated = totalCreated + 1;
+
+                settings["productId"] = totalCreated;
 
                 // Prevent Submit
                 e.preventDefault();
@@ -94,6 +96,11 @@
              */
             self.removeProduct = function(a) {
                 var clicked = $(this);
+
+                // Delete if con
+                if (!confirm("Really, Really delete?")) {
+                    return;
+                }
 
                 // Remove the dictionary key
                 delete Products[clicked.attr("rel").replace("product-", "")];
