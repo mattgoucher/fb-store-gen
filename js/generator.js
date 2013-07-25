@@ -15,7 +15,8 @@
         function Generator() {
 
             var self         = this,
-                previewBtn   = $("#preview");
+                previewBtn   = $("#preview"),
+                previewFrame = $("#preview-frame");
             
             totalCreated = 0;
 
@@ -84,6 +85,15 @@
              * @type {undefined}
              */
             generate = self.generate = function() {
+
+                console.log("Generate");
+
+                // Save Store Settings
+                saveStoreSettings();
+
+                // Update the listing of products
+                updateProductsList();
+
                 $("#generator-output").text(produceProductHTML());
             };
 
@@ -92,9 +102,17 @@
              * Open a preview window (no workie)
              * @return {undefined}
              */
-            self.preview = function() {
-                //data:text/html,
-                window.open("data:text/html," + produceProductHTML(), "test");
+            self.preview = function(e) {
+
+                // Compile All Settings
+                self.generate();
+
+                // Swap frame HTML.
+                previewFrame.contents().find('body').html(produceProductHTML());
+
+                // Don't Submit Form
+                e.preventDefault();
+
             };
 
 
@@ -147,8 +165,8 @@
             }
 
             // Bindings
-            previewBtn.on("click", self.preview);
             AddProductForm.on("submit", self.addProduct);
+            StoreSettingsForm.on("submit", self.preview);
             CreatedProductsList.on("click", ".edit-product", self.editProduct);
             CreatedProductsList.on("click", ".remove-product", self.removeProduct);
 
@@ -164,12 +182,6 @@
 
             // Give us the ability to lookup later.
             Products[productSettings["productId"]] = productSettings;
-
-            // Save Store Settings
-            saveStoreSettings();
-
-            // Update the listing of products
-            updateProductsList();
 
             // Output the markup
             generate();
