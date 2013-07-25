@@ -37,7 +37,17 @@ a { color: #25BCB6; text-decoration: none; } a:hover { text-decoration: underlin
         #generator .settings label {
             display: block;
             float: left;
-            width: 100px;
+            width: 30%;
+            line-height: 25px
+        }
+        #generator .text input {
+            padding: 5px;
+            width: 70%;
+            line-height: 1;
+            border: 1px solid #ccc;
+            -webkit-border-radius: 3px;
+               -moz-border-radius: 3px;
+                    border-radius: 3px;
         }
 
     /* Output */
@@ -60,6 +70,7 @@ a { color: #25BCB6; text-decoration: none; } a:hover { text-decoration: underlin
         cursor: pointer;
         display: block;
         padding: 5px;
+        line-height: 1;
         border-bottom: 1px solid #ccc;
     }
     .created-products li:hover {

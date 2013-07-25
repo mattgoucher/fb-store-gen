@@ -77,58 +77,61 @@
 			<textarea id="generator-output" readonly></textarea>
 		</div>
 
-		<script id="before-html" type="text/template">
-			<!DOCTYPE html>
-			<html>
-				<head>
-					<title><%= storeName %></title>
-				</head>
-				<body>
-					<div style="font-family:'helvetica neue','helvetica',arial,sans-serif;font-weight:300">
-						<fieldset style="border-top:1px solid #ddd;border-left:none;border-right:none;border-bottom:none;max-width:576px;padding:15px 0px!important;margin:0 auto 20px auto!important">
-							<a href="<%= storeUrl %>" target="_blank">
-								<img src="<%= storeBanner %>" style="display: block; margin: 0 0 40px 0;">
-							</a>
-							<legend style="color:#555;font-size:20px;font-weight:bold;padding:0 10px 0 0">
-								<%= storeName %>
-							</legend>
-		</script>
+<script id="before-html" type="text/template">
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<title><%= storeName %></title>
+		</head>
+		<body>
+			<div style="font-family:'helvetica neue','helvetica',arial,sans-serif;font-weight:300">
+				<fieldset style="border-top:1px solid #ddd;border-left:none;border-right:none;border-bottom:none;max-width:576px;padding:15px 0px!important;margin:0 auto 20px auto!important">
+					<a href="<%= storeUrl %>" target="_blank">
+						<img src="<%= storeBanner %>" style="display: block; margin: 0 0 40px 0;">
+					</a>
+					<legend style="color:#555;font-size:20px;font-weight:bold;padding:0 10px 0 0">
+						<%= storeName %>
+					</legend>
+</script>
 
-		<script id="product-item" type="text/template">
-							<div style="width:33.33%;float:left;">
-								<a href="<%= productLink %>" style="display: block;margin: 0 10px; color:#333;text-decoration:none" target="_blank">
-									<div style="max-height:130px;overflow:hidden;border:5px solid #d4d4d4;position:relative">
-										<img src="<%= productImage %>" style="width:100%">
-										<div style="position:absolute;width:100%;height:25px;right:0;bottom:0;background:rgba(255,255,255,0.7);text-align:right">
-											<span style="position:absolute;display:block;width:90%;height:100%;padding:0 5%;top:-12px;left:0;color:#333;text-decoration:none">
-												<p>$<%= productPrice %></p>
-											</span>
-										</div>
-									</div>
-									<h3 style="font-weight:300;font-size:12px;text-align:right"><%= productName %></h3>
-								</a>
+<script id="product-item" type="text/template">
+					<div style="width:33.33%;float:left;">
+						<a href="<%= productLink %>" style="display: block;margin: 0 10px; color:#333;text-decoration:none" target="_blank">
+							<div style="max-height:130px;overflow:hidden;border:5px solid #d4d4d4;position:relative">
+								<img src="<%= productImage %>" style="width:100%">
+								<div style="position:absolute;width:100%;height:25px;right:0;bottom:0;background:rgba(255,255,255,0.7);text-align:right">
+									<span style="position:absolute;display:block;width:90%;height:100%;padding:0 5%;top:-12px;left:0;color:#333;text-decoration:none">
+										<p>$<%= productPrice %></p>
+									</span>
+								</div>
 							</div>
-		</script>
-
-		<script id="after-html" type="text/template">
-						</fieldset>
+							<h3 style="font-weight:300;font-size:12px;text-align:right"><%= productName %></h3>
+						</a>
 					</div>
+</script>
 
-					<div class="footer">
-						<p style=" text-align: center; font-size: 14px; background: #EEE; text-shadow: 0px 1px 0px #FFF; border: 1px solid #DDD; padding: 15px 10px;">
-							<strong>Want to see more?</strong>
-							Check out the full
-							<a href="<%= storeUrl %>" target="_blank" style="color: #333; text-decoration: none;">
-								Online Store &rarr;
-							</a>
-						</p>
-					</div>
-				</body>
-			</html>
-		</script>
+<script id="after-html" type="text/template">
+				</fieldset>
+			</div>
+
+			<div class="footer">
+				<p style=" text-align: center; font-size: 14px; background: #EEE; text-shadow: 0px 1px 0px #FFF; border: 1px solid #DDD; padding: 15px 10px;">
+					<strong>Want to see more?</strong>
+					Check out the full
+					<a href="<%= storeUrl %>" target="_blank" style="color: #333; text-decoration: none;">
+						Online Store &rarr;
+					</a>
+				</p>
+			</div>
+		</body>
+	</html>
+</script>
 
 		<script id="product-list-item" type="text/template">
-			<li class="product-item" id="<%= productName %>"><%= productName %></li>
+			<li class="product-item" id="product-<%= productId %>">
+				<%= productName %>
+				<span rel="product-<%= productId %>" class="remove-product">remove</a>
+			</li>
 		</script>
 
 		<script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>

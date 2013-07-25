@@ -11,8 +11,9 @@
 
         function Generator() {
 
-            var self       = this,
-                previewBtn = $("#preview");
+            var self         = this,
+                previewBtn   = $("#preview"),
+                totalCreated = 0;
 
             // Product Form
             Products            = {};
@@ -40,6 +41,8 @@
                 var errors   = 0,
                     settings = {};
 
+                settings["productId"] = totalCreated + 1;
+
                 // Prevent Submit
                 e.preventDefault();
 
@@ -59,6 +62,7 @@
                     alert("Please Fill out all fields");
                 }else{
                     createProduct(settings);
+                    zeroProductFields();
                 }
 
             };
@@ -91,8 +95,13 @@
             self.removeProduct = function(a) {
                 var clicked = $(this);
 
-                delete Products[clicked.attr("id")];
-                clicked.remove();
+                // Remove the dictionary key
+                delete Products[clicked.attr("rel").replace("product-", "")];
+
+                // Remove DOM node
+                clicked.parent("li").remove();
+
+                // Regen code
                 self.generate();
 
             };
@@ -101,7 +110,7 @@
             // Bindings
             previewBtn.on("click", self.preview);
             AddProductForm.on("submit", self.addProduct);
-            CreatedProductsList.on("click", "li", self.removeProduct);
+            CreatedProductsList.on("click", ".remove-product", self.removeProduct);
 
         }
 
@@ -114,7 +123,7 @@
         function createProduct(productSettings) {
 
             // Give us the ability to lookup later.
-            Products[productSettings["productName"]] = productSettings;
+            Products[productSettings["productId"]] = productSettings;
 
             // Save Store Settings
             saveStoreSettings();
@@ -124,6 +133,8 @@
 
             // Output the markup
             generate();
+
+            console.log(Products);
 
         }
 
@@ -160,8 +171,9 @@
             CreatedProductsList.html('').hide();
 
             for (var product in Products) {
+                console.log(Products[product]['productId']);
                 CreatedProductsList.append(
-                    $(_.template(itemTemplate, {productName: product}))
+                    $(_.template(itemTemplate, Products[product]))
                 ).show();
             }
 
@@ -181,6 +193,23 @@
             });
 
         }
+
+
+        /**
+         * Reset product input fields
+         * @return {undefined} [description]
+         */
+        function zeroProductFields() {
+            AddProductInputs.each(function() {
+                var input = $(this);
+
+                if (input.attr("type") === "text") {
+                    input.val('');
+                }
+
+            });
+        }
+
 
         return Generator;
 
