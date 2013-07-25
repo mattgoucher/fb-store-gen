@@ -130,4 +130,5 @@ a { color: #25BCB6; text-decoration: none; } a:hover { text-decoration: underlin
                 border-radius: 3px;
     }
     .btn:hover { background: #2a9e99; }
+    .btn.warning { background: #bc2570; }
     .btn[disabled="disabled"] { opacity: 0.2; }

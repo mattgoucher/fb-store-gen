@@ -9,7 +9,8 @@
             storeSettings,
             AddProductForm,
             AddProductInputs,
-            StoreSettingsForm;
+            StoreSettingsForm,
+            AddProductSubmitBtn;
 
         function Generator() {
 
@@ -21,7 +22,8 @@
             // Product Form
             Products            = {};
             AddProductForm      = $("#product-settings"),
-            AddProductInputs    = AddProductForm.find('input');
+            AddProductInputs    = AddProductForm.find('input').not(".btn");
+            AddProductSubmitBtn = AddProductForm.find('input[type="submit"]');
 
             // Created Products List
             CreatedProductsList = $("#products-list");
@@ -68,6 +70,7 @@
                 if (errors) {
                     alert("Please Fill out all fields");
                 }else{
+                    AddProductSubmitBtn.val("Add Product").attr("class", "btn");
                     updateProductId();
                     createProduct(settings);
                     zeroProductFields();
@@ -132,6 +135,8 @@
                 if (!loadedProduct) {
                     return alert("Something really bad happened");
                 }
+
+                AddProductSubmitBtn.val("Save Changes").attr("class", "btn warning");
 
                 AddProductInputs.each(function() {
                     if (loadedProduct[$(this).attr("id")]) {
