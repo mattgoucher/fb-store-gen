@@ -86,7 +86,7 @@
              */
             generate = self.generate = function() {
 
-                console.log("Generate");
+                LOG("Generate");
 
                 // Save Store Settings
                 saveStoreSettings();
@@ -164,6 +164,43 @@
 
             }
 
+
+            /**
+             * Load a session up from a json-string
+             * @param  {string} session json string containing product information
+             * @return {undefined}
+             */
+            self.loadSession = function() {
+
+                var lastProduct = 0,
+                    session     = prompt("Paste Session");
+
+                Products = JSON.parse(session);
+
+                for (var key in Products) {
+                    lastProduct = Products[key]["productId"];
+                }
+
+                totalCreated = lastProduct + 1;
+
+                // Regen
+                self.generate();
+                updateProductId();
+
+            }
+
+
+            /**
+             * Return the products object, stringifyed
+             * @return {string} current session
+             */
+            self.getSession = function() {
+
+                return alert(JSON.stringify(Products) + '');
+
+            }
+
+
             // Bindings
             AddProductForm.on("submit", self.addProduct);
             StoreSettingsForm.on("submit", self.preview);
@@ -186,7 +223,7 @@
             // Output the markup
             generate();
 
-            console.log(Products);
+            LOG(Products);
 
         }
 
@@ -223,7 +260,7 @@
             CreatedProductsList.html('').hide();
 
             for (var product in Products) {
-                console.log(Products[product]['productId']);
+                LOG(Products[product]['productId']);
                 CreatedProductsList.append(
                     $(_.template(itemTemplate, Products[product]))
                 ).show();
@@ -276,11 +313,15 @@
 
     }());
 
-
+    function LOG (message) {
+        if (location.hash === "#debug") {
+            console.log(message);
+        }
+    }
 
     $(function() {
         window.Generator = new Generator;
-        //console.log(window.Generator);
+        //LOG(window.Generator);
     });
 
 }());
