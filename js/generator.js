@@ -150,7 +150,7 @@ Controllers.controller("generatorCtrl", [
                 output += _.template(productTemplate, finalSettings.products[product]);
             }
 
-            output += document.getElementById("after-html").innerHTML;
+            output += _.template(document.getElementById("after-html").innerHTML, finalSettings);
 
             $scope.output = output;
 
