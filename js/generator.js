@@ -20,8 +20,6 @@ Controllers.controller("generatorCtrl", [
     "$scope",
     function ($scope) {
 
-        window.fuck = $scope;
-
         var createdProducts = 0;
 
 
@@ -141,12 +139,8 @@ Controllers.controller("generatorCtrl", [
                 productTemplate = document.getElementById("product-item").innerHTML,
                 output        = _.template(document.getElementById("before-html").innerHTML, finalSettings);
 
-            console.log(finalSettings);
-
             // Generate Product HTML
             for (var product in finalSettings.products) {
-                console.log('asd');
-                console.log(finalSettings.products[product]);
                 output += _.template(productTemplate, finalSettings.products[product]);
             }
 
