@@ -30,7 +30,8 @@ Controllers.controller("generatorCtrl", [
         $scope.products      = {};
         $scope.storeSettings = {};
         $scope.isEditing     = false;
-        $scope.output        = "Add a product, and generate."
+        $scope.output        = "Add a product, and generate.";
+        $scope.alert         = "Welcome.";
 
 
         /**
@@ -53,6 +54,11 @@ Controllers.controller("generatorCtrl", [
         }
 
 
+        function setAlert(message) {
+            $scope.alert = message;
+        }
+
+
         /**
          * Push product into products array
          * @return {undefined}
@@ -72,6 +78,9 @@ Controllers.controller("generatorCtrl", [
 
             // Reset forms
             resetFormsToPristine();
+
+            // Alert user of action
+            setAlert("Product added successfully.");
 
         };
 
@@ -104,6 +113,9 @@ Controllers.controller("generatorCtrl", [
             // Save over the current product
             $scope.products[edits["id"]] = edits;
 
+            // Update alert
+            setAlert("Product " + edits.name + " saved.");
+
             // No longer editing
             $scope.isEditing = false;
 
@@ -121,6 +133,9 @@ Controllers.controller("generatorCtrl", [
         $scope.deleteProduct = function(product) {
 
             if (confirm("Delete. Seriously, Gone Forever")) {
+
+                // Note
+                setAlert(product.name + " deleted successfully.");
 
                 // DELETE KEY
                 delete $scope.products[product["id"]];
@@ -146,6 +161,8 @@ Controllers.controller("generatorCtrl", [
 
             // Set textarea 
             outputTextbox.value = compiledTemplate;
+
+            setAlert("Successfully generated");
 
         }
 
