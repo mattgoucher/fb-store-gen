@@ -36,11 +36,11 @@
 						</div>
 						<div class="input text">
 							<label for="store-banner">Banner URL:</label>
-							<input type="url" data-ng-model="storeSettings.bannerUrl" placeholder="http://site.com/image.jpg" required>
+							<input type="url" data-ng-model="storeSettings.bannerUrl" placeholder="http://site.com/image.jpg">
 						</div>
 						<div class="input text">
-							<label for="store-border">Border Color:<small>(not yet)</small></label>
-							<input type="text" data-ng-model="storeSettings.borderColor" placeholder="#dddddd" disabled="disabled">
+							<label for="store-border">Tagline:</label>
+							<input type="text" data-ng-model="storeSettings.tagline" placeholder="Want To see more? Click here.">
 						</div>
 						<div class="input submit preview">
 							<input type="submit" class="btn" value="Save/Generate" data-ng-click="generate()" data-ng-disabled="this.pageSettings.$invalid">
@@ -143,9 +143,13 @@
 				<body>
 					<div style="font-family:'helvetica neue','helvetica',arial,sans-serif;font-weight:300">
 						<fieldset style="border-top:1px solid #ddd;border-left:none;border-right:none;border-bottom:none;max-width:576px;padding:15px 0px!important;margin:0 auto 20px auto!important">
-							<a href="<%= store.url %>" target="_blank">
-								<img src="<%= store.bannerUrl %>" style="display: block; margin: 0 0 40px 0;">
-							</a>
+
+							<% if (store.bannerUrl) { %>
+								<a href="<%= store.url %>" target="_blank">
+									<img src="<%= store.bannerUrl %>" style="display: block; margin: 0 0 40px 0;">
+								</a>
+							<% } %>
+
 							<legend style="color:#555;font-size:20px;font-weight:bold;padding:0 10px 0 0">
 								<%= store.name %>
 							</legend>
@@ -153,7 +157,7 @@
 							<% for (var product in products) { %>
 							<div style="width:33.33%;float:left;">
 								<a href="<%= products[product].url %>" style="display: block;margin: 0 10px; color:#333;text-decoration:none" target="_blank">
-									<div style="max-height:130px;overflow:hidden;border:5px solid #d4d4d4;position:relative">
+									<div style="max-height:130px;overflow:hidden;border:5px solid #dddddd;position:relative">
 										<img src="<%= products[product].image %>" style="width:100%">
 										<div style="position:absolute;width:100%;height:25px;right:0;bottom:0;background:rgba(255,255,255,0.7);text-align:right">
 											<span style="position:absolute;display:block;width:90%;height:100%;padding:0 5%;top:-12px;left:0;color:#333;text-decoration:none">
@@ -169,15 +173,12 @@
 						</fieldset>
 					</div>
 
-					<div class="footer">
-						<p style=" text-align: center; font-size: 14px; background: #EEE; text-shadow: 0px 1px 0px #FFF; border: 1px solid #DDD; padding: 15px 10px;">
-							<strong>Want to see more?</strong>
-							Check out the full
-							<a href="<%= store.url %>" target="_blank" style="color: #333; text-decoration: none;">
-								Online Store &rarr;
-							</a>
-						</p>
+					<div class="footer" style="display: block; margin: 0 0 20px 0;">
+						<a href="<%= store.url %>" target="_blank" style="display: block; color: #333; text-decoration: none; font-family:'helvetica neue','helvetica',arial,sans-serif;font-weight:700; text-align: center; font-size: 14px; background: #EEE; text-shadow: 0px 1px 0px #FFF; border: 1px solid #DDD; padding: 15px 10px;">
+							<%= store.tagline %>
+						</a>
 					</div>
+					<a style="display: block; text-align: center; font-family: sans-serif; font-size: 12px; text-decoration: none; color: #000; " href="http://groundctrl.com" target="_blank">powered by <strong style="font-weight: 700;">ground</strong>(ctrl)</a>
 				</body>
 			</html>
 		</script>

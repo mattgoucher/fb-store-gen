@@ -27,9 +27,13 @@
                 createdProducts = 0;
 
 
-            // Current Scope
+            // Pristine
             $scope.products      = {};
-            $scope.storeSettings = {};
+            $scope.storeSettings = {
+                tagline: "Want to see more? Click here."
+            };
+
+            // Current Scope
             $scope.isEditing     = false;
             $scope.output        = "Add a product, and generate.";
             $scope.alert         = "Welcome.";
