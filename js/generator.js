@@ -20,7 +20,10 @@ Controllers.controller("generatorCtrl", [
     "$scope",
     function ($scope) {
 
-        var createdProducts = 0;
+        var previewFrame    = document.getElementById("preview-frame"),
+            outputTemplate  = document.getElementById("before-html").innerHTML,
+            outputTextbox   = document.getElementById("output-area"),
+            createdProducts = 0;
 
 
         // Current Scope
@@ -113,7 +116,7 @@ Controllers.controller("generatorCtrl", [
         /**
          * Delete a product from memory
          * @param  {object} product product to be deleted
-         * @return {undefined}
+         * @return {undefine
          */
         $scope.deleteProduct = function(product) {
 
@@ -135,20 +138,14 @@ Controllers.controller("generatorCtrl", [
          */
         $scope.generate = function() {
 
-            var finalSettings = { store: $scope.storeSettings, products: $scope.products };
-                productTemplate = document.getElementById("product-item").innerHTML,
-                output        = _.template(document.getElementById("before-html").innerHTML, finalSettings);
+            var finalSettings    = { store: $scope.storeSettings, products: $scope.products },
+                compiledTemplate = _.template(outputTemplate, finalSettings);
 
-            // Generate Product HTML
-            for (var product in finalSettings.products) {
-                output += _.template(productTemplate, finalSettings.products[product]);
-            }
+            // set iFrame HTML
+            previewFrame.contentDocument.documentElement.innerHTML = compiledTemplate;
 
-            output += _.template(document.getElementById("after-html").innerHTML, finalSettings);
-
-            $scope.output = output;
-
-            document.getElementById("preview-frame").contentDocument.documentElement.innerHTML = String($scope.output)
+            // Set textarea 
+            outputTextbox.value = compiledTemplate;
 
         }
 

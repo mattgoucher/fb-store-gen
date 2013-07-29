@@ -127,7 +127,7 @@
 		</div>
 
 		<div id="output">
-			<textarea data-ng-model="output"></textarea>
+			<textarea id="output-area" data-ng-model="output"></textarea>
 			<iframe id="preview-frame" frameborder="no"></iframe>
 		</div>
 
@@ -146,25 +146,23 @@
 							<legend style="color:#555;font-size:20px;font-weight:bold;padding:0 10px 0 0">
 								<%= store.name %>
 							</legend>
-		</script>
 
-		<script id="product-item" type="text/template">
+							<% for (var product in products) { %>
 							<div style="width:33.33%;float:left;">
-								<a href="<%= url %>" style="display: block;margin: 0 10px; color:#333;text-decoration:none" target="_blank">
+								<a href="<%= products[product].url %>" style="display: block;margin: 0 10px; color:#333;text-decoration:none" target="_blank">
 									<div style="max-height:130px;overflow:hidden;border:5px solid #d4d4d4;position:relative">
-										<img src="<%= image %>" style="width:100%">
+										<img src="<%= products[product].image %>" style="width:100%">
 										<div style="position:absolute;width:100%;height:25px;right:0;bottom:0;background:rgba(255,255,255,0.7);text-align:right">
 											<span style="position:absolute;display:block;width:90%;height:100%;padding:0 5%;top:-12px;left:0;color:#333;text-decoration:none">
-												<p>$<%= price %></p>
+												<p>$<%= products[product].price %></p>
 											</span>
 										</div>
 									</div>
-									<h3 style="font-weight:300;font-size:12px;text-align:right"><%= name %></h3>
+									<h3 style="font-weight:300;font-size:12px;text-align:right"><%= products[product].name %></h3>
 								</a>
 							</div>
-		</script>
+							<% }; %>
 
-		<script id="after-html" type="text/template">
 						</fieldset>
 					</div>
 
