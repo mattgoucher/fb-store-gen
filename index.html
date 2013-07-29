@@ -113,12 +113,12 @@
 							<small>(Click to edit)</small>
 						</h3>
 					</div>
-					<ul class="products-list" data-ng-show="!products[1]">
+					<ul class="products-list" data-ng-show="!hasProducts()">
 						<li class="product-item">
 							No Products Added...Add one!
 						</li>
 					</ul>
-					<ul class="products-list" data-ng-show="products[1]">
+					<ul class="products-list" data-ng-show="hasProducts()">
 						<li class="product-item" data-ng-repeat="product in products">
 							<span>{{product.name}}</span>
 							<a class="edit" data-ng-click="editProduct(product)"></a>

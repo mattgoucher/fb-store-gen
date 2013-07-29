@@ -40,6 +40,15 @@
 
 
             /**
+             * Have we created products before
+             * @return {bool}
+             */
+            $scope.hasProducts = function() {
+                return (createdProducts > 0)
+            };
+
+
+            /**
              * Reset form models
              * @return {undefined}
              */
