@@ -1,7 +1,7 @@
 /**
- * Facebook Store Generator
- * ========================
- * 
+ * Store Generator
+ * ===============
+ * Design & Development: Matt Goucher
 */
 @import url(reset.css);
 
@@ -157,11 +157,11 @@ a { color: #25BCB6; text-decoration: none; } a:hover { text-decoration: underlin
     }
     #output textarea {
         float: left;
-        padding: 20px 0;
+        padding: 20px 0 0 0;
         width: 50%;
         min-width: 50%;
-        height: 600px;
-        min-height: 600px;
+        height: 900px;
+        min-height: 900px;
         border: none;
     }
 
@@ -172,7 +172,7 @@ a { color: #25BCB6; text-decoration: none; } a:hover { text-decoration: underlin
             margin: 0 auto;
             padding: 20px 0;
             width: 50%;
-            height: 600px;
+            height: 900px;
             border-left: 1px solid #ccc;
         }
 
