@@ -83,6 +83,10 @@
                 // Alert user of action
                 setAlert("Product added successfully.");
 
+                if (!$scope.pageSettings.$invalid) {
+                    $scope.generate();
+                }
+
             };
 
 
