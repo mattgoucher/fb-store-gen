@@ -29,7 +29,7 @@ Controllers.controller("generatorCtrl", [
         $scope.products      = {};
         $scope.storeSettings = {};
         $scope.isEditing     = false;
-        $scope.output        = "GENERATE IT, BRO."
+        $scope.output        = "Add a product, and generate."
 
 
         /**

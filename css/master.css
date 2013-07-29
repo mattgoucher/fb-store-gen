@@ -130,6 +130,7 @@ a { color: #25BCB6; text-decoration: none; } a:hover { text-decoration: underlin
     }
     #output textarea {
         float: left;
+        padding: 20px 0;
         width: 50%;
         min-width: 50%;
         height: 600px;
@@ -142,6 +143,7 @@ a { color: #25BCB6; text-decoration: none; } a:hover { text-decoration: underlin
             display: block;
             float: right;
             margin: 0 auto;
+            padding: 20px 0;
             width: 50%;
             height: 600px;
             border-left: 1px solid #ccc;
