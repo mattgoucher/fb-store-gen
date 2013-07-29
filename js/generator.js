@@ -119,8 +119,14 @@ Controllers.controller("generatorCtrl", [
          */
         $scope.deleteProduct = function(product) {
 
-            // DELETE
-            delete $scope.products[product["id"]];
+            if (confirm("Delete. Seriously, Gone Forever")) {
+
+                // DELETE KEY
+                delete $scope.products[product["id"]];
+
+            }else{
+                $scope.isEditing = false;
+            }
 
         };
 

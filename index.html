@@ -121,8 +121,8 @@
 						</h3>
 					</div>
 					<ul id="products-list">
-						<li class="product-item" data-ng-repeat="product in products" data-ng-click="editProduct(product)">
-							{{product.name}}
+						<li class="product-item" data-ng-repeat="product in products">
+							<span data-ng-click="editProduct(product)">{{product.name}}</span>
 							<a class="delete" data-ng-click="deleteProduct(product)">Delete</a>
 						</li>
 					</ul>

@@ -111,12 +111,13 @@ a { color: #25BCB6; text-decoration: none; } a:hover { text-decoration: underlin
             display: none;
             position: absolute;
             top: 0; right: 0;
-            width: 25px;
-            height: 25px;
+            padding: 0 10px;
+            height: 100%;
             text-align: center;
             color: #fff;
             font-weight: 700;
-            line-height: 19px;
+            line-height: 30px;
+            text-decoration: none;
             overflow: hidden;
             background: #bc2525;
         }
