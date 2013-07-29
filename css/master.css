@@ -107,7 +107,7 @@ a { color: #25BCB6; text-decoration: none; } a:hover { text-decoration: underlin
     .created-products li:last-of-type { border: none; }
 
         /* Actions */
-        .created-products li .remove-product {
+        .created-products li .delete {
             display: none;
             position: absolute;
             top: 0; right: 0;
@@ -120,21 +120,7 @@ a { color: #25BCB6; text-decoration: none; } a:hover { text-decoration: underlin
             overflow: hidden;
             background: #bc2525;
         }
-        .created-products li .edit-product {
-            display: none;
-            position: absolute;
-            top: 0; right: 25px;
-            width: 50px;
-            height: 25px;
-            text-align: center;
-            color: #fff;
-            font-weight: 700;
-            line-height: 19px;
-            overflow: hidden;
-            background: #25BCB6;
-        }
-        .created-products li:hover .edit-product,
-        .created-products li:hover .remove-product { display: block; }
+        .created-products li:hover .delete { display: block; }
 
     /* Output */
     #output {
