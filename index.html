@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html data-ng-app="storemaker">
 	<head>
 		<title>Facebook Store Generator</title>
 		<link rel="stylesheet" type="text/css" href="css/master.css">
 	</head>
-	<body>
+	<body data-ng-controller="generatorCtrl">
+
+		<div id="header">
+			<h1 class="title branding">
+				Facebook Store Generator
+				<small>(v2)</small>
+			</h1>
+		</div>
 
 		<div id="generator">
 
@@ -12,61 +19,96 @@
 				<div class="wrapper">
 					<div class="header">
 						<h3 class="title">
-							Facebook Store Generator
-							<small>(v1.5)</small>
+							Store Settings
 						</h3>
 					</div>
-					<form id="page-settings">
+					<ng-form name="pageSettings">
 						<div class="input text">
 							<label for="store-banner">Store Name:</label>
-							<input id="storeName" name="store-name" type="text" placeholder="Awesome Store">
+							<input type="text" data-ng-model="storeSettings.name" placeholder="Awesome Store" required>
 						</div>
 						<div class="input text">
 							<label for="store-banner">Store URL:</label>
-							<input id="storeUrl" name="store-url" type="url" placeholder="http://jakeowen.net/store" required>
+							<input type="url" data-ng-model="storeSettings.url" placeholder="http://jakeowen.net/store" required>
 						</div>
 						<div class="input text">
 							<label for="store-banner">Banner URL:</label>
-							<input id="storeBanner" name="store-banner" type="url" placeholder="http://site.com/image.jpg" required>
+							<input type="url" data-ng-model="storeSettings.bannerUrl" placeholder="http://site.com/image.jpg" required>
 						</div>
 						<div class="input text">
 							<label for="store-border">Border Color:<small>(not yet)</small></label>
-							<input id="storeBorder" name="store-border" type="text" placeholder="#dddddd" disabled="disabled">
+							<input type="text" data-ng-model="storeSettings.borderColor" placeholder="#dddddd" disabled="disabled">
 						</div>
 						<div class="input submit preview">
-							<input id="preview" type="submit" class="btn" value="Save/Preview">
+							<input type="submit" class="btn" value="Save/Preview" data-ng-click="generate()" data-ng-disabled="this.pageSettings.$invalid">
 						</div>
-					</form>
+					</ng-form>
 				</div>
 			</div>
 
 			<div class="product-settings settings">
 				<div class="wrapper">
 					<div class="header">
-						<h3 class="title">Add a Product</h3>
+						<h3 class="title">
+							<span data-ng-show="!isEditing">Add a Product</span>
+							<span data-ng-show="isEditing">Make Edits to Existing Product</span>
+						</h3>
 					</div>
-					<form id="product-settings">
-						<input type="hidden" id="productId" value="0">
+
+					<ng-form name="addProductForm" data-ng-show="!isEditing">
 						<div class="input text">
 							<label for="product-name">Name:</label>
-							<input id="productName" name="product-name" type="text" placeholder="Awesome Product">
+							<input id="productName" name="product-name" type="text" data-ng-model="product.name" placeholder="Awesome Product" required>
 						</div>
 						<div class="input text price">
 							<label for="product-price">Price: $</label>
-							<input id="productPrice" name="product-price" type="text" placeholder="1.99">
+							<input id="productPrice" name="product-price" type="text" data-ng-model="product.price" placeholder="1.99" required>
 						</div>
 						<div class="input text image-url">
-							<label for="product-image">Image URL:</label>
-							<input id="productImage" name="product-image" type="text" placeholder="http://site.com/image.jpg">
+							<label>
+								Image URL:
+								<small>(include http)</small>
+							</label>
+							<input id="productImage" name="product-image" type="text" data-ng-model="product.image" placeholder="http://site.com/image.jpg" required>
 						</div>
 						<div class="input text product-link">
-							<label for="product-link">Link:</label>
-							<input id="productLink" name="product-link" type="text" placeholder="http://site.com/store/products/test">
+							<label for="product-link">
+								Link: <small>(include http)</small>
+							</label>
+							<input id="productLink" name="product-link" type="url" data-ng-model="product.url" placeholder="http://site.com/store/products/test" required>
 						</div>
 						<div class="input submit add-product">
-							<input id="Add Product" type="submit" class="btn" value="Add Product">
+							<input id="Add Product" type="submit" class="btn" data-ng-click="addProduct()" data-ng-disabled="this.addProductForm.$invalid" value="Add Product">
 						</div>
-					</form>
+					</ng-form>
+
+					<ng-form name="editProductForm" data-ng-show="isEditing">
+						<div class="input text">
+							<label>Name:</label>
+							<input type="text" data-ng-model="editedProduct.name" placeholder="Awesome Product" required>
+						</div>
+						<div class="input text price">
+							<label>Price: $</label>
+							<input type="text" data-ng-model="editedProduct.price" placeholder="1.99" required>
+						</div>
+						<div class="input text image-url">
+							<label>
+								Image URL:
+								<small>(include http)</small>
+							</label>
+							<input type="text" data-ng-model="editedProduct.image" placeholder="http://site.com/image.jpg" required>
+						</div>
+						<div class="input text product-link">
+							<label for="product-link">
+								Link: <small>(include http)</small>
+							</label>
+							<input type="url" data-ng-model="editedProduct.url" placeholder="http://site.com/store/products/test" required>
+						</div>
+						<div class="input submit add-product">
+							<input type="submit" class="btn success" data-ng-click="saveExistingProduct()" data-ng-disabled="this.editProductForm.$invalid" value="Save Changes">
+						</div>
+					</ng-form>
+
 				</div>
 			</div>
 
@@ -75,56 +117,54 @@
 					<div class="header">
 						<h3 class="title">
 							Created Products
-							<small>(hover to edit/remove)</small>
+							<small>Click to edit</small>
 						</h3>
 					</div>
-					<ul id="products-list"></ul>
+					<ul id="products-list">
+						<li class="product-item" data-ng-repeat="product in products" data-ng-click="editProduct(product)">
+							{{product.name}}
+							<a data-ng-click="deleteProduct(product)">Delete</a>
+						</li>
+					</ul>
 				</div>
 			</div>
 
 		</div>
 
-
 		<div id="output">
-			<textarea id="generator-output" readonly></textarea>
+			<textarea data-ng-model="output"></textarea>
+			<iframe id="preview-frame" frameborder="no"></iframe>
 		</div>
-
-		<iframe id="preview-frame" frameborder="no"></iframe>
-
-
-
-
-
 
 		<script id="before-html" type="text/template">
 			<!DOCTYPE html>
 			<html>
 				<head>
-					<title><%= storeName %></title>
+					<title><%= store.name %></title>
 				</head>
 				<body>
 					<div style="font-family:'helvetica neue','helvetica',arial,sans-serif;font-weight:300">
 						<fieldset style="border-top:1px solid #ddd;border-left:none;border-right:none;border-bottom:none;max-width:576px;padding:15px 0px!important;margin:0 auto 20px auto!important">
-							<a href="<%= storeUrl %>" target="_blank">
-								<img src="<%= storeBanner %>" style="display: block; margin: 0 0 40px 0;">
+							<a href="<%= store.url %>" target="_blank">
+								<img src="<%= store.bannerUrl %>" style="display: block; margin: 0 0 40px 0;">
 							</a>
 							<legend style="color:#555;font-size:20px;font-weight:bold;padding:0 10px 0 0">
-								<%= storeName %>
+								<%= store.name %>
 							</legend>
 		</script>
 
 		<script id="product-item" type="text/template">
 							<div style="width:33.33%;float:left;">
-								<a href="<%= productLink %>" style="display: block;margin: 0 10px; color:#333;text-decoration:none" target="_blank">
+								<a href="<%= url %>" style="display: block;margin: 0 10px; color:#333;text-decoration:none" target="_blank">
 									<div style="max-height:130px;overflow:hidden;border:5px solid #d4d4d4;position:relative">
-										<img src="<%= productImage %>" style="width:100%">
+										<img src="<%= image %>" style="width:100%">
 										<div style="position:absolute;width:100%;height:25px;right:0;bottom:0;background:rgba(255,255,255,0.7);text-align:right">
 											<span style="position:absolute;display:block;width:90%;height:100%;padding:0 5%;top:-12px;left:0;color:#333;text-decoration:none">
-												<p>$<%= productPrice %></p>
+												<p>$<%= price %></p>
 											</span>
 										</div>
 									</div>
-									<h3 style="font-weight:300;font-size:12px;text-align:right"><%= productName %></h3>
+									<h3 style="font-weight:300;font-size:12px;text-align:right"><%= name %></h3>
 								</a>
 							</div>
 		</script>
@@ -137,7 +177,7 @@
 						<p style=" text-align: center; font-size: 14px; background: #EEE; text-shadow: 0px 1px 0px #FFF; border: 1px solid #DDD; padding: 15px 10px;">
 							<strong>Want to see more?</strong>
 							Check out the full
-							<a href="<%= storeUrl %>" target="_blank" style="color: #333; text-decoration: none;">
+							<a href="<%= store.url %>" target="_blank" style="color: #333; text-decoration: none;">
 								Online Store &rarr;
 							</a>
 						</p>
@@ -146,15 +186,9 @@
 			</html>
 		</script>
 
-		<script id="product-list-item" type="text/template">
-			<li class="product-item" id="product-<%= productId %>">
-				<%= productName %>
-				<span rel="product-<%= productId %>" class="edit-product">Edit</span>
-				<span rel="product-<%= productId %>" class="remove-product">x</span>
-			</li>
-		</script>
 
-		<script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+		<!--<script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script> NO $ -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js" type="text/javascript"></script>
 		<script src="js/underscore.js" type="text/javascript"></script>
 		<script src="js/generator.js" type="text/javascript"></script>
 
