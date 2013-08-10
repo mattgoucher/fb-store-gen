@@ -182,7 +182,29 @@
 
                 setAlert("Successfully generated");
 
-            }
+            };
+
+
+            /**
+             * Generate a blob file download
+             * @return {undefined}
+             */
+            $scope.saveSession = function() {
+
+                if (typeof Blob !== "function") {
+                    return alert("Your browser does not permit file downloads.");
+                }
+
+                var payload     = "" + JSON.stringify(angular.copy($scope.products));
+                    blobFile    = new Blob(payload, "text/json"),
+                    url         = (window.webkitURL || window.URL).createObjectURL(blobFile),
+                    downloadUrl = ["text/json", "Store Generator Session", url].join(":");
+
+                console.log(payload);
+
+                window.location = downloadUrl;
+
+            };
 
         }
     ]);

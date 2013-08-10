@@ -1,0 +1,103 @@
+/**
+ * Store Generator (mixins)
+ * ========================
+ * Development: Matt Goucher : matt[at]mattgoucher[dot]com
+*/
+
+    // Border Radius
+    @mixin border-radius($radius) {
+        -webkit-border-radius: $radius;
+           -moz-border-radius: $radius;
+            -ms-border-radius: $radius;
+             -o-border-radius: $radius;
+                border-radius: $radius;
+    }
+
+
+    // Box Shadow
+    @mixin box-shadow($properties...) {
+        -webkit-box-shadow: $properties;
+           -moz-box-shadow: $properties;
+            -ms-box-shadow: $properties;
+             -o-box-shadow: $properties;
+                box-shadow: $properties;
+    }
+
+
+    // Transitions
+    @mixin transition($properties...) {
+        -webkit-transition: $properties;
+           -moz-transition: $properties;
+            -ms-transition: $properties;
+             -o-transition: $properties;
+                transition: $properties;
+    }
+
+
+    // Box Sizing
+    @mixin box-sizing($property) {
+        -webkit-box-sizing: $property;
+           -moz-box-sizing: $property;
+                box-sizing: $property;
+    }
+
+
+    // Animation
+    @mixin animation($properties) {
+        -webkit-animation: $properties;
+           -moz-animation: $properties;
+             -o-animation: $properties;
+                animation: $properties;
+    }
+
+
+    // Touch Callout
+    @mixin touch-callout($property) {
+        -webkit-touch-callout: $property;
+          -webkit-user-select: $property;
+           -khtml-user-select: $property;
+             -moz-user-select: $property;
+              -ms-user-select: $property;
+                  user-select: $property;
+    }
+
+
+    // Apperance
+    @mixin appearance($property) {
+        -webkit-appearance: $property;
+           -moz-appearance: $property;
+             -o-appearance: $property;
+                appearance: $property;
+    }
+
+
+    // Truncate
+    @mixin truncate {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+
+    // Inline Block
+    @mixin inline-block {
+        display: -moz-inline-stack;
+        display: inline-block;
+        zoom: 1;
+        *display: inline;
+    }
+
+
+    // Clearfix
+    @mixin clearfix {
+        zoom:1;
+        &:before, &:after {
+            content: "\0020"; 
+            display: block; 
+            height: 0; 
+            overflow: hidden; 
+        }
+        &:after {
+            clear: both;
+        }
+    }

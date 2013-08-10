@@ -1,0 +1,147 @@
+/**
+ * Store Generator (master)
+ * =======================
+ * Development: Matt Goucher : matt[at]mattgoucher[dot]com
+*/
+
+
+    /**
+     * Core
+     * ====
+     * 
+    */
+    body {
+        padding: 50px 0 0 0;
+    }
+    a {
+        color: $purple;
+        &:hover { color: $darkPurple; }
+    }
+
+
+    /**
+     * Header
+     * ======
+     * Structure, Navigation
+    */
+
+        // Structure
+        #header {
+            margin: 0;
+            background-color: $purple;
+        
+            .navbar-brand {
+                margin-right: 15px;
+                color: $white;
+            
+                small {
+                    font-size: 10px;
+                    line-height: 1;
+                }
+            }
+        }
+
+        // Navigation
+        .navbar-nav { float: none; }
+        .navbar-nav > li {
+
+            // Default
+            a {
+                color: $lightPurple;
+                background-color: none;
+                &:hover { color: #fff; }
+            }
+
+            // Active
+            &.active a, &.active:hover a, &.open > a {
+                color: $white !important;
+                background: $darkPurple !important;
+            }
+
+        }
+
+
+
+    /**
+     * Generator
+     * =========
+     * Structure
+    */
+
+        // Structure
+        #generator {
+            background-color: $lightestGrey;
+
+            // Settings Panels
+            > .settings {
+
+                &.bordered {
+                    border-left: 1px solid $lightGrey;
+                    border-right: 1px solid $lightGrey;
+                }
+
+            }
+
+        }
+
+
+
+    /**
+     * List Group
+     * ==========
+     * Structure
+    */
+
+        // Structure
+        .list-group-item {
+
+            // Edit
+            .edit {
+                display: block;
+                position: absolute;
+                top: 0; left: 0;
+                right: 0; bottom: 0;
+                z-index: 5;
+                background: none;
+                @include border-radius(0);
+            }
+
+            // Delete
+            .delete {
+                cursor: pointer;
+                display: none;
+            }
+
+            &:hover .delete {
+                position: relative;
+                z-index: 10;
+                display: inline-block;
+                background-color: $danger;
+                &:hover { background-color: $darkDanger; }
+            }
+
+        }
+
+
+
+    /**
+     * Dropdown Menu
+     * =============
+     * Structure
+    */
+
+        // Structure
+        .dropdown-menu {
+            padding: 5px 0;
+            border: none;
+
+            > li > a:hover,
+            > li > a:focus {
+                cursor: pointer;
+                color: $darkPurple;
+                background: none;
+            }
+
+        }
+
+

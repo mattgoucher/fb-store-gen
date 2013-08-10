@@ -2,23 +2,42 @@
 <html data-ng-app="storemaker">
 	<head>
 		<title>Store Generator</title>
-		<link rel="stylesheet" type="text/css" href="css/master.css">
+		<link rel="stylesheet" type="text/css" href="css/application.css">
 	</head>
 	<body data-ng-controller="generatorCtrl">
 
-		<div id="header">
-			<h1 class="title branding">
+		<div id="header" class="navbar navbar-fixed-top">
+			<a href="/" class="navbar-brand">
 				Store Generator
-				<small>(v2.1)</small>
-			</h1>
-			<div class="alert" data-ng-show="alert" data-ng-click="alert = undefined">
-				{{alert}}
-			</div>
+				<small>(v2.2)</small>
+			</a>
+			<ul class="nav navbar-nav">
+				<li class="active">
+					<a href="/">Home</a>
+				</li>
+				<li class="dropdown pull-right">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						More <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li class="load">
+							<a data-ng-click="loadSession()" data-ng-disabled="true">Load</a>
+						</li>
+						<li class="save">
+							<a data-ng-click="saveSession()" data-ng-disabled="true">Save</a>
+						</li>
+						<li class="divider"></li>
+						<li class="reset">
+							<a data-ng-click="resetSession()">Reset</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
 		</div>
 
-		<div id="generator">
+		<div id="generator" class="clearfix">
 
-			<div class="storesettings settings">
+			<div class="storesettings settings col-4">
 				<div class="wrapper">
 					<div class="header">
 						<h3 class="title">
@@ -49,7 +68,7 @@
 				</div>
 			</div>
 
-			<div class="product-settings settings">
+			<div class="product-settings settings col-4 bordered">
 				<div class="wrapper">
 					<div class="header">
 						<h3 class="title">
@@ -105,7 +124,7 @@
 				</div>
 			</div>
 
-			<div class="created-products settings">
+			<div class="created-products settings col-4">
 				<div class="wrapper">
 					<div class="header">
 						<h3 class="title">
@@ -113,17 +132,13 @@
 							<small>(Click to edit)</small>
 						</h3>
 					</div>
-					<ul class="products-list" data-ng-show="!hasProducts()">
-						<li class="product-item">
-							No Products Added...Add one!
+					<ul class="list-group">
+						<li class="list-group-item" data-ng-repeat="product in products">
+							<span class="badge delete" data-ng-click="deleteProduct(product)">delete</span>
+							{{product.name}}
+							<a class="edit badge" data-ng-click="editProduct(product)"></a>
 						</li>
-					</ul>
-					<ul class="products-list" data-ng-show="hasProducts()">
-						<li class="product-item" data-ng-repeat="product in products">
-							<span>{{product.name}}</span>
-							<a class="edit" data-ng-click="editProduct(product)"></a>
-							<a class="delete" data-ng-click="deleteProduct(product)">Delete</a>
-						</li>
+						<li class="list-group-item none" data-ng-show="products.length < 1">No products added...Add one!</li>
 					</ul>
 				</div>
 			</div>
@@ -187,10 +202,12 @@
 		</script>
 
 
-		<!--<script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script> NO $ -->
+		<script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js" type="text/javascript"></script>
+
 		<script src="js/underscore.js" type="text/javascript"></script>
 		<script src="js/generator.js" type="text/javascript"></script>
+		<script src="js/bootstrap.js" type="text/javascript"></script>
 
 	</body>
 </html>
