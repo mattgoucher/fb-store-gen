@@ -6,6 +6,7 @@
 
 // Brand Colors
 $white: #fff;
+$black: #000;
 
     // Purples
     $purple: #563D7C;
@@ -15,7 +16,31 @@ $white: #fff;
     // Greys
     $lightestGrey: #F7F7F9;
     $lightGrey: #E1E1E8;
+    $grey: #999;
 
     // Danger
     $danger: #D9534F;
     $darkDanger: #D2322D;
+
+
+// States
+
+    // Success
+    $successText:             #468847;
+    $successBackground:       #dff0d8;
+    $successBorder:           darken(adjust-hue($successBackground, -10), 5%);
+
+    // Error
+    $errorText:               #b94a48;
+    $errorBackground:         #f2dede;
+    $errorBorder:             darken(adjust-hue($errorBackground, -10), 3%);
+
+    // Warning
+    $warningText:             #c09853;
+    $warningBackground:       #fcf8e3;
+    $warningBorder:           darken(adjust-hue($warningBackground, -10), 3%);
+
+    // Info
+    $infoText:                #3a87ad;
+    $infoBackground:          #d9edf7;
+    $infoBorder:              darken(adjust-hue($infoBackground, -10), 7%);

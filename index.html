@@ -12,14 +12,14 @@
 				<small>(v2.2)</small>
 			</a>
 			<ul class="nav navbar-nav">
-				<li class="active">
-					<a href="/">Home</a>
-				</li>
 				<li class="dropdown pull-right">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 						More <span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
+						<li class="about">
+							<a href="#">About</a>
+						</li>
 						<li class="load">
 							<a data-ng-click="loadSession()" data-ng-disabled="true">Load</a>
 						</li>
@@ -45,24 +45,24 @@
 						</h3>
 					</div>
 					<ng-form name="pageSettings">
-						<div class="input text">
+						<div class="form-group input text">
 							<label for="store-banner">Store Name:</label>
-							<input type="text" data-ng-model="storeSettings.name" placeholder="Awesome Store" required>
+							<input type="text" class="form-control" data-ng-model="storeSettings.name" placeholder="Awesome Store" required>
 						</div>
-						<div class="input text">
+						<div class="form-group input text">
 							<label for="store-banner">Store URL:</label>
-							<input type="url" data-ng-model="storeSettings.url" placeholder="http://jakeowen.net/store" required>
+							<input type="url" class="form-control" data-ng-model="storeSettings.url" placeholder="http://jakeowen.net/store" required>
 						</div>
-						<div class="input text">
+						<div class="form-group input text">
 							<label for="store-banner">Banner URL:</label>
-							<input type="url" data-ng-model="storeSettings.bannerUrl" placeholder="http://site.com/image.jpg">
+							<input type="url" class="form-control" data-ng-model="storeSettings.bannerUrl" placeholder="http://site.com/image.jpg">
 						</div>
-						<div class="input text">
+						<div class="form-group input text">
 							<label for="store-border">Tagline:</label>
-							<input type="text" data-ng-model="storeSettings.tagline" placeholder="Want To see more? Click here.">
+							<input type="text" class="form-control" data-ng-model="storeSettings.tagline" placeholder="Want To see more? Click here.">
 						</div>
-						<div class="input submit preview">
-							<input type="submit" class="btn" value="Save/Generate" data-ng-click="generate()" data-ng-disabled="this.pageSettings.$invalid">
+						<div class="form-group input submit preview">
+							<button type="submit" class="btn btn-primary btn-block" data-ng-click="generate()" data-ng-disabled="pageSettings.$invalid">Save &amp; Generate</button>
 						</div>
 					</ng-form>
 				</div>
@@ -78,46 +78,46 @@
 					</div>
 
 					<ng-form name="addProductForm" data-ng-show="!isEditing">
-						<div class="input text">
+						<div class="form-group input text">
 							<label for="product-name">Name:</label>
-							<input id="productName" name="product-name" type="text" data-ng-model="product.name" placeholder="Awesome Product" required>
+							<input id="productName" class="form-control" name="product-name" type="text" data-ng-model="product.name" placeholder="Awesome Product" required>
 						</div>
-						<div class="input text price">
+						<div class="form-group input text price">
 							<label for="product-price">Price: $</label>
-							<input id="productPrice" name="product-price" type="text" data-ng-model="product.price" placeholder="1.99" required>
+							<input id="productPrice" class="form-control" name="product-price" type="text" data-ng-model="product.price" placeholder="1.99" required>
 						</div>
-						<div class="input text image-url">
+						<div class="form-group input text image-url">
 							<label>Image URL:</label>
-							<input id="productImage" name="product-image" type="text" data-ng-model="product.image" placeholder="http://site.com/image.jpg" required>
+							<input id="productImage" class="form-control" name="product-image" type="url" data-ng-model="product.image" placeholder="http://site.com/image.jpg" required>
 						</div>
-						<div class="input text product-link">
+						<div class="form-group input text product-link">
 							<label for="product-link">Link:</label>
-							<input id="productLink" name="product-link" type="url" data-ng-model="product.url" placeholder="http://site.com/store/products/test" required>
+							<input id="productLink" class="form-control" name="product-link" type="url" data-ng-model="product.url" placeholder="http://site.com/store/products/test" required>
 						</div>
-						<div class="input submit add-product">
-							<input id="Add Product" type="submit" class="btn" data-ng-click="addProduct()" data-ng-disabled="this.addProductForm.$invalid" value="Add Product">
+						<div class="form-group input submit add-product">
+							<button type="submit" class="btn btn-primary btn-block" data-ng-click="addProduct()" data-ng-disabled="addProductForm.$invalid">Add Product</button>
 						</div>
 					</ng-form>
 
 					<ng-form name="editProductForm" data-ng-show="isEditing">
-						<div class="input text">
+						<div class="form-group input text">
 							<label>Name:</label>
-							<input type="text" data-ng-model="editedProduct.name" placeholder="Awesome Product" required>
+							<input type="text" class="form-control" data-ng-model="editedProduct.name" placeholder="Awesome Product" required>
 						</div>
-						<div class="input text price">
+						<div class="form-group input text price">
 							<label>Price: $</label>
-							<input type="text" data-ng-model="editedProduct.price" placeholder="1.99" required>
+							<input type="text" class="form-control" data-ng-model="editedProduct.price" placeholder="1.99" required>
 						</div>
-						<div class="input text image-url">
+						<div class="form-group input text image-url">
 							<label>Image URL:</label>
-							<input type="text" data-ng-model="editedProduct.image" placeholder="http://site.com/image.jpg" required>
+							<input type="text" class="form-control" data-ng-model="editedProduct.image" placeholder="http://site.com/image.jpg" required>
 						</div>
-						<div class="input text product-link">
+						<div class="form-group input text product-link">
 							<label for="product-link">Link:</label>
-							<input type="url" data-ng-model="editedProduct.url" placeholder="http://site.com/store/products/test" required>
+							<input type="url" class="form-control" data-ng-model="editedProduct.url" placeholder="http://site.com/store/products/test" required>
 						</div>
-						<div class="input submit add-product">
-							<input type="submit" class="btn success" data-ng-click="saveExistingProduct()" data-ng-disabled="this.editProductForm.$invalid" value="Save Changes">
+						<div class="form-group input submit add-product">
+							<button type="submit" class="btn btn-primary btn-block" data-ng-click="saveExistingProduct()" data-ng-disabled="this.editProductForm.$invalid">Save Changes</button>
 						</div>
 					</ng-form>
 
@@ -138,7 +138,7 @@
 							{{product.name}}
 							<a class="edit badge" data-ng-click="editProduct(product)"></a>
 						</li>
-						<li class="list-group-item none" data-ng-show="products.length < 1">No products added...Add one!</li>
+						<li class="list-group-item none" data-ng-show="totalProducts() < 1">No products added...Add one!</li>
 					</ul>
 				</div>
 			</div>

@@ -1,0 +1,12 @@
+/**
+ * Store Generator (helpers)
+ * ========================
+ * Development: Matt Goucher : matt[at]mattgoucher[dot]com
+*/
+
+    // Visibility
+    .hidden { display: none; }
+
+    // Form States
+    input.ng-valid   { @include inputFieldState($black, #fff, lighten($purple, 40%)); }
+    input.ng-invalid { @include inputFieldState($errorText, #fff, $errorBorder); }

@@ -145,3 +145,38 @@
         }
 
 
+
+    /**
+     * Form Elements
+     * =============
+     * Structure, Buttons
+    */
+   
+        // Structure
+        label {
+            display: block;
+            color: $grey;
+            font-size: 10px;
+            font-weight: normal;
+            text-transform: uppercase;
+        }
+
+        // Buttons
+        .btn-primary {
+            background-color: $purple;
+            border-color: $darkPurple;
+
+            // Static + Disabled
+            &.disabled, &[disabled], &[disabled]:hover,
+            &:focus, &:active, &.active {
+                background-color: $purple;
+                border-color: $darkPurple;
+            }
+
+            // Hover + Active
+            &:hover, &:focus, &:active, &.active {
+                background-color: $darkPurple;
+                border-color: $darkPurple;
+            }
+
+        }

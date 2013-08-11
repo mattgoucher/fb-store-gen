@@ -21,6 +21,8 @@
         "$scope",
         function ($scope) {
 
+            console.log($scope);
+
             var previewFrame    = document.getElementById("preview-frame"),
                 outputTemplate  = document.getElementById("before-html").innerHTML,
                 outputTextbox   = document.getElementById("output-area"),
@@ -49,6 +51,19 @@
 
 
             /**
+             * Get count of products
+             * @return {int} total number of products
+             */
+            $scope.totalProducts = function() {
+                var count = 0;
+                for (var product in $scope.products) {
+                    count = count = 1;
+                }
+                return count;
+            }
+
+
+            /**
              * Reset form models
              * @return {undefined}
              */
@@ -68,6 +83,10 @@
             }
 
 
+            /**
+             * Push a message to the scope
+             * @param {strign} message Message to display
+             */
             function setAlert(message) {
                 $scope.alert = message;
             }
@@ -196,9 +215,9 @@
                 }
 
                 var payload     = "" + JSON.stringify(angular.copy($scope.products));
-                    blobFile    = new Blob(payload, "text/json"),
-                    url         = (window.webkitURL || window.URL).createObjectURL(blobFile),
-                    downloadUrl = ["text/json", "Store Generator Session", url].join(":");
+                    // blobFile    = new Blob(payload, "text/json"),
+                    // url         = (window.webkitURL || window.URL).createObjectURL(blobFile),
+                    // downloadUrl = ["text/json", "Store Generator Session", url].join(":");
 
                 console.log(payload);
 

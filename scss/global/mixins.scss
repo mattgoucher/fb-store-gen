@@ -101,3 +101,19 @@
             clear: both;
         }
     }
+
+
+    // Input Field State
+    @mixin inputFieldState($textColor: #000, $backgroundColor: none, $borderColor: transparent, $shadowColor: none) {
+        color: $textColor;
+        background-color: $backgroundColor;
+        border: 1px solid $borderColor;
+        @include box-shadow(none);
+        @include transition(border-color 200ms ease);
+        &:focus {
+            border: 1px solid darken($borderColor, 20%);
+            @include box-shadow(none);
+        }
+    }
+
+
