@@ -184,6 +184,15 @@
 
             }
 
+
+            /**
+             * Output JSON to the preview fr ame
+             * @return {undefined}
+             */
+            $scope.dumpJSON = function() {
+                outputTextbox.value = JSON.stringify($scope.products);
+            };
+
         }
     ]);
 
