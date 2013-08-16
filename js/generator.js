@@ -190,6 +190,7 @@
              * @return {undefined}
              */
             $scope.dumpJSON = function() {
+                setAlert("JSON Dumped!");
                 outputTextbox.value = JSON.stringify($scope.products);
             };
 
